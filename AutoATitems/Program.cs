@@ -204,7 +204,7 @@ namespace AutoATitems
 								&& !target.IsLinkensProtected()
 								&& !target.IsMagicImmune()
 								&& Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(atos.Name)
-								&& me.Distance2D(e) <= 2000
+								&& me.Distance2D(target) <= 2000
 								&& Utils.SleepCheck("atos")
 								)
 							{
@@ -218,7 +218,7 @@ namespace AutoATitems
 								&& me.CanCast()
 								&& !target.IsMagicImmune()
 								&& Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(vail.Name)
-								&& me.Distance2D(e) <= 1500
+								&& me.Distance2D(target) <= 1500
 								&& Utils.SleepCheck("vail")
 								)
 							{
