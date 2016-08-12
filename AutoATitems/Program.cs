@@ -14,7 +14,7 @@ namespace AutoATitems
 	internal class Program
 	{
 		private static readonly Menu Menu = new Menu("AutoATitems", "AutoATitems by kj2a", true, "npc_dota_hero_invoker", true);
-		private Item urn, dagon, soul, halberd, ethereal, mjollnir, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
+		private static Item urn, dagon, soul, halberd, ethereal, mjollnir, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
 		
 		private static bool keyCombo;
 		private static Hero me;
@@ -106,6 +106,7 @@ namespace AutoATitems
 					medall = me.FindItem("item_medallion_of_courage") ?? me.FindItem("item_solar_crest");
 					sheep = e.ClassID == ClassID.CDOTA_Unit_Hero_Tidehunter ? null : me.FindItem("item_sheepstick");
 					soul = me.FindItem("item_soul_ring");
+					var v = ObjectManager.GetEntities<Hero>().Where(x => x.Team != me.Team && x.IsAlive && x.IsVisible && !x.IsIllusion && !x.IsMagicImmune()).ToList();	
 					
 					if (target.IsVisible && me.Distance2D(target) <= 1200)
 					{
