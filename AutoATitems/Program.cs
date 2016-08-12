@@ -104,14 +104,15 @@ namespace AutoATitems
 					satanic = me.FindItem("item_satanic");
 					blink = me.FindItem("item_blink");
 					medall = me.FindItem("item_medallion_of_courage") ?? me.FindItem("item_solar_crest");
-					sheep = e.ClassID == ClassID.CDOTA_Unit_Hero_Tidehunter ? null : me.FindItem("item_sheepstick");
+					sheep = target.ClassID == ClassID.CDOTA_Unit_Hero_Tidehunter ? null : me.FindItem("item_sheepstick");
 					soul = me.FindItem("item_soul_ring");
-					var v = ObjectManager.GetEntities<Hero>().Where(x => x.Team != me.Team && x.IsAlive && x.IsVisible && !x.IsIllusion && !x.IsMagicImmune()).ToList();	
+					var qqqqqqqqqqqqq = ObjectManager.GetEntities<Hero>().Where(x => x.Team != me.Team && x.IsAlive && x.IsVisible && !x.IsIllusion && !x.IsMagicImmune()).ToList();	
+					var stoneModif = e.Modifiers.Any(y => y.Name == "modifier_medusa_stone_gaze_stone");
 					
 					if (target.IsVisible && me.Distance2D(target) <= 1200)
 					{
 						
-					    var InvForgeds = ObjectMgr.GetEntities<Unit>().Where(x => (x.ClassID == ClassID.CDOTA_BaseNPC_Invoker_Forged_Spirit) && x.IsAlive && x.IsControllable);
+					    var InvForgeds = ObjectManager.GetEntities<Unit>().Where(x => (x.ClassID == ClassID.CDOTA_BaseNPC_Invoker_Forged_Spirit) && x.IsAlive && x.IsControllable);
 					    if (InvForgeds != null) {
 							foreach (var v in InvForgeds)
 							{
@@ -311,14 +312,14 @@ namespace AutoATitems
 								satanic.UseAbility();
 								Utils.Sleep(240, "satanic");
 							} // Satanic Item end
-							if (mail != null && mail.CanBeCasted() && (v.Count(x => x.Distance2D(me) <= 650) >=
+							if (mail != null && mail.CanBeCasted() && (qqqqqqqqqqqqq.Count(x => x.Distance2D(me) <= 650) >=
 																	   (Menu.Item("Heelm").GetValue<Slider>().Value)) &&
 								Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(mail.Name) && Utils.SleepCheck("mail"))
 							{
 								mail.UseAbility();
 								Utils.Sleep(100, "mail");
 							}
-							if (bkb != null && bkb.CanBeCasted() && (v.Count(x => x.Distance2D(me) <= 650) >=
+							if (bkb != null && bkb.CanBeCasted() && (qqqqqqqqqqqqq.Count(x => x.Distance2D(me) <= 650) >=
 																	 (Menu.Item("Heel").GetValue<Slider>().Value)) &&
 								Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(bkb.Name) && Utils.SleepCheck("bkb"))
 							{
