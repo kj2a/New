@@ -58,7 +58,7 @@ namespace AutoATitems
                {
                    {"item_diffusal_blade", true},
                    {"item_diffusal_blade_2", true},
-		   {"item_lotus_orb", true}
+		   {"item_lotus_orb", true},
 	           {"item_glimmer_cape", true},
                	   {"item_veil_of_discord", true},
                	   {"item_rod_of_atos", true},
