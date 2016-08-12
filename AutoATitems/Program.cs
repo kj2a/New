@@ -56,18 +56,18 @@ namespace AutoATitems
             Menu.AddItem(
                new MenuItem("Item", "Items:").SetValue(new AbilityToggler(new Dictionary<string, bool>
                {
-                    {"item_diffusal_blade", true},
-                    {"item_diffusal_blade_2", true},
-					{"item_lotus_orb", true}
-			       {"item_glimmer_cape", true},
+                   {"item_diffusal_blade", true},
+                   {"item_diffusal_blade_2", true},
+		   {"item_lotus_orb", true}
+	           {"item_glimmer_cape", true},
                	   {"item_veil_of_discord", true},
                	   {"item_rod_of_atos", true},
                    {"item_mask_of_madness", true},
                    {"item_sheepstick", true},
                    {"item_mjollnir", true},
                    {"item_satanic", true},
-					{"item_manta", true}
-			   })));
+		   {"item_manta", true}
+	        })));
             Menu.AddItem(new MenuItem("Heel", "Min targets to BKB").SetValue(new Slider(2, 1, 5)));
             Menu.AddItem(new MenuItem("Heelm", "Min targets to BladeMail").SetValue(new Slider(2, 1, 5)));
 
