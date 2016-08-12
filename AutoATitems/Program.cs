@@ -66,7 +66,7 @@ namespace AutoATitems
             Menu.AddItem(new MenuItem("Heel", "Min targets to BKB").SetValue(new Slider(2, 1, 5)));
             Menu.AddItem(new MenuItem("Heelm", "Min targets to BladeMail").SetValue(new Slider(2, 1, 5)));
 
-
+                        Menu.AddToMainMenu();
 			Game.OnUpdate += Game_OnUpdate;
 			Console.WriteLine("> AutoATitems# loaded!");
 
