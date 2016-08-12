@@ -14,7 +14,7 @@ namespace AutoATitems
 	internal class Program
 	{
 		private static readonly Menu Menu = new Menu("AutoATitems", "AutoATitems by kj2a", true, "npc_dota_hero_invoker", true);
-		private static Item urn, dagon, ethereal, mjollnir, halberd, vail, atos, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
+		private static Item urn, dagon, ethereal, mjollnir, halberd, glimmer, vail, atos, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
 		
 		private static bool keyCombo;
 		private static Hero me;
@@ -56,6 +56,7 @@ namespace AutoATitems
             Menu.AddItem(
                new MenuItem("Item", "Items:").SetValue(new AbilityToggler(new Dictionary<string, bool>
                {
+			       {"item_glimmer_cape", true},
                	   {"item_veil_of_discord", true},
                	   {"item_rod_of_atos", true},
                    {"item_mask_of_madness", true},
@@ -63,7 +64,7 @@ namespace AutoATitems
                    {"item_arcane_boots", true},
                    {"item_mjollnir", true},
                    {"item_satanic", true},
-		   {"item_manta", true}
+					{"item_manta", true}
 			   })));
             Menu.AddItem(new MenuItem("Heel", "Min targets to BKB").SetValue(new Slider(2, 1, 5)));
             Menu.AddItem(new MenuItem("Heelm", "Min targets to BladeMail").SetValue(new Slider(2, 1, 5)));
@@ -106,6 +107,7 @@ namespace AutoATitems
 					bkb = me.FindItem("item_black_king_bar");
 					satanic = me.FindItem("item_satanic");
 					blink = me.FindItem("item_blink");
+					glimmer = me.FindItem("item_glimmer_cape");
 					medall = me.FindItem("item_medallion_of_courage") ?? me.FindItem("item_solar_crest");
 					sheep = target.ClassID == ClassID.CDOTA_Unit_Hero_Tidehunter ? null : me.FindItem("item_sheepstick");
 					
@@ -173,6 +175,7 @@ namespace AutoATitems
 								halberd.UseAbility(target);
 								Utils.Sleep(250, "halberd");
 							}
+							
 							if ( // Mjollnir
 								mjollnir != null
 								&& mjollnir.CanBeCasted()
@@ -212,12 +215,22 @@ namespace AutoATitems
 								Utils.Sleep(250, "atos");
 							} // atos Item end
 							
+							if (glimmer != null
+								&& glimmer.CanBeCasted()
+								&& me.Distance2D(target) <= 300
+								&& Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(glimmer.Name)
+								&& Utils.SleepCheck("glimmer"))
+							{
+								glimmer.UseAbility(me);
+								Utils.Sleep(200, "glimmer");
+							}
+							
 							if ( // vail
 								vail != null
 								&& vail.CanBeCasted()
 								&& me.CanCast()
 								&& !target.IsMagicImmune()
-								&& Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(vail.Name)
+								&& Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(vail.Name)
 								&& me.Distance2D(target) <= 1500
 								&& Utils.SleepCheck("vail")
 								)
