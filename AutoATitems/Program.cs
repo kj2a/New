@@ -13,7 +13,7 @@ namespace AutoATitems
 {
 	internal class Program
 	{
-		private static readonly Menu Menu = new Menu("AutoATitems", "AutoATitems by kj2a", true, "npc_dota_hero_invoker", true);
+		private static readonly Menu Menu = new Menu("AutoATitems", "AutoATitems by kj2a", true, "item_aegis", true);
 		private static Item urn, dagon, diff ,ethereal, mjollnir, halberd, glimmer, lotusorb, vail, atos, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
 		
 		private static bool keyCombo;
