@@ -241,7 +241,7 @@ namespace AutoATitems
 							}
 							if (lotusorb != null && lotusorb.CanBeCasted() &&
 								Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(lotusorb.Name)
-								&& (v.Count(x => x.Distance2D(me) <= 650) >= (Menu.Item("Heelm").GetValue<Slider>().Value) && Utils.SleepCheck("lotusorb"))
+								&& (qqqqqqqqqqqqq.Count(x => x.Distance2D(me) <= 650) >= (Menu.Item("Heelm").GetValue<Slider>().Value) && Utils.SleepCheck("lotusorb"))
 							   )
 							{
 								lotusorb.UseAbility(me);
