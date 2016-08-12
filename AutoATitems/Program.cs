@@ -56,12 +56,15 @@ namespace AutoATitems
             Menu.AddItem(
                new MenuItem("Item", "Items:").SetValue(new AbilityToggler(new Dictionary<string, bool>
                {
+               	   {"item_heavens_halberd", true},
+               	   {"item_veil_of_discord", true},
+               	   {"item_rod_of_atos", true},
                    {"item_mask_of_madness", true},
                    {"item_sheepstick", true},
                    {"item_arcane_boots", true},
                    {"item_mjollnir", true},
                    {"item_satanic", true},
-				   {"item_manta", true}
+		   {"item_manta", true}
 			   })));
             Menu.AddItem(new MenuItem("Heel", "Min targets to BKB").SetValue(new Slider(2, 1, 5)));
             Menu.AddItem(new MenuItem("Heelm", "Min targets to BladeMail").SetValue(new Slider(2, 1, 5)));
@@ -99,6 +102,9 @@ namespace AutoATitems
 					orchid = me.FindItem("item_orchid") ?? me.FindItem("item_bloodthorn");
 					abyssal = me.FindItem("item_abyssal_blade");
 					mail = me.FindItem("item_blade_mail");
+					halberd = me.FindItem("item_heavens_halberd");
+					vail = me.FindItem("item_veil_of_discord");
+					atos = me.FindItem("item_rod_of_atos");
 					bkb = me.FindItem("item_black_king_bar");
 					satanic = me.FindItem("item_satanic");
 					blink = me.FindItem("item_blink");
@@ -193,7 +199,52 @@ namespace AutoATitems
 								medall.UseAbility(target);
 								Utils.Sleep(250, "Medall");
 							} // Medall Item end
+							if ( // atos Blade
+								atos != null
+								&& atos.CanBeCasted()
+								&& me.CanCast()
+								&& !e.IsLinkensProtected()
+								&& !e.IsMagicImmune()
+								&& Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(atos.Name)
+								&& me.Distance2D(e) <= 2000
+								&& Utils.SleepCheck("atos")
+								)
+							{
+								atos.UseAbility(e);
 
+								Utils.Sleep(250, "atos");
+							} // atos Item end
+							
+							if ( // vail
+								vail != null
+								&& vail.CanBeCasted()
+								&& me.CanCast()
+								&& !e.IsMagicImmune()
+								&& Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(vail.Name)
+								&& me.Distance2D(e) <= 1500
+								&& Utils.SleepCheck("vail")
+								)
+							{
+								vail.UseAbility(e.Position);
+								Utils.Sleep(250, "vail");
+							} // vail Item end
+							
+							if ( // Hellbard
+								halberd != null
+								&& halberd.CanBeCasted()
+								&& me.CanCast()
+								&& !e.IsMagicImmune()
+								&& (e.NetworkActivity == NetworkActivity.Attack
+									|| e.NetworkActivity == NetworkActivity.Crit
+									|| e.NetworkActivity == NetworkActivity.Attack2)
+								&& Utils.SleepCheck("halberd")
+								&& me.Distance2D(e) <= 700
+								&& Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(halberd.Name)
+								)
+							{
+								halberd.UseAbility(e);
+								Utils.Sleep(250, "halberd");
+							} // Hellbard Item end
 							if ( // sheep
 								sheep != null
 								&& sheep.CanBeCasted()
