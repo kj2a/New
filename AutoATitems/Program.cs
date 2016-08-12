@@ -1,14 +1,13 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 using Ensage;
 using SharpDX;
-using Ensage.Common.Extensions;
 using Ensage.Common;
+using Ensage.Common.Extensions;
 using Ensage.Common.Menu;
-using SharpDX.Direct3D9;
-using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace AutoATitems
 {
