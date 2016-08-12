@@ -200,7 +200,7 @@ namespace AutoATitems
 								&& me.CanCast()
 								&& !target.IsLinkensProtected()
 								&& !target.IsMagicImmune()
-								&& !target.IsStunned() && !target.IsHexed() && !target.IsSilenced
+								&& !target.IsStunned() && !target.IsHexed() && !target.IsSilenced()
 								&& me.Distance2D(target) <= 1400
 								&& !stoneModif
 								&& Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(sheep.Name)
@@ -226,7 +226,7 @@ namespace AutoATitems
 							} // Abyssal Item end
 							if (orchid != null && orchid.CanBeCasted() && me.Distance2D(target) <= 900
 								&& Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(orchid.Name)
-								&& !target.IsStunned() && !target.IsHexed() && !target.IsSilenced
+								&& !target.IsStunned() && !target.IsHexed() && !target.IsSilenced()
 								&& Utils.SleepCheck("orchid"))
 							{
 								orchid.UseAbility(target);
