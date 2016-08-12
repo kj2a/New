@@ -14,7 +14,7 @@ namespace AutoATitems
 	internal class Program
 	{
 		private static readonly Menu Menu = new Menu("AutoATitems", "AutoATitems by kj2a", true, "npc_dota_hero_invoker", true);
-		private static Item urn, dagon, ethereal, mjollnir, halberd, glimmer, vail, atos, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
+		private static Item urn, dagon, diff ,ethereal, mjollnir, halberd, glimmer, lotusorb, vail, atos, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
 		
 		private static bool keyCombo;
 		private static Hero me;
@@ -56,12 +56,14 @@ namespace AutoATitems
             Menu.AddItem(
                new MenuItem("Item", "Items:").SetValue(new AbilityToggler(new Dictionary<string, bool>
                {
+                    {"item_diffusal_blade", true},
+                    {"item_diffusal_blade_2", true},
+					{"item_lotus_orb", true}
 			       {"item_glimmer_cape", true},
                	   {"item_veil_of_discord", true},
                	   {"item_rod_of_atos", true},
                    {"item_mask_of_madness", true},
                    {"item_sheepstick", true},
-                   {"item_arcane_boots", true},
                    {"item_mjollnir", true},
                    {"item_satanic", true},
 					{"item_manta", true}
@@ -97,6 +99,7 @@ namespace AutoATitems
 					urn = me.FindItem("item_urn_of_shadows");
 					manta = me.FindItem("item_manta");
 					dagon = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_dagon"));
+					diff = me.FindItem("item_diffusal_blade")?? me.FindItem("item_diffusal_blade_2");
 					halberd = me.FindItem("item_heavens_halberd");
 					mjollnir = me.FindItem("item_mjollnir");
 					orchid = me.FindItem("item_orchid") ?? me.FindItem("item_bloodthorn");
@@ -108,6 +111,7 @@ namespace AutoATitems
 					satanic = me.FindItem("item_satanic");
 					blink = me.FindItem("item_blink");
 					glimmer = me.FindItem("item_glimmer_cape");
+					lotusorb = me.FindItem("item_lotus_orb");
 					medall = me.FindItem("item_medallion_of_courage") ?? me.FindItem("item_solar_crest");
 					sheep = target.ClassID == ClassID.CDOTA_Unit_Hero_Tidehunter ? null : me.FindItem("item_sheepstick");
 					
@@ -223,6 +227,25 @@ namespace AutoATitems
 							{
 								glimmer.UseAbility(me);
 								Utils.Sleep(200, "glimmer");
+							}
+							if (diff != null
+									&& diff.CanBeCasted()
+									&& diff.CurrentCharges > 0
+									&& me.Distance2D(target) <= 400
+									&& !target.HasModifier("modifier_item_diffusal_blade_slow")
+									&& Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(diff.Name) &&
+									Utils.SleepCheck("diff"))
+								{
+								diff.UseAbility(target);
+								Utils.Sleep(4000, "diff");
+							}
+							if (lotusorb != null && lotusorb.CanBeCasted() &&
+								Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(lotusorb.Name)
+								&& (v.Count(x => x.Distance2D(me) <= 650) >= (Menu.Item("Heelm").GetValue<Slider>().Value) && Utils.SleepCheck("lotusorb"))
+							   )
+							{
+								lotusorb.UseAbility(me);
+								Utils.Sleep(250, "lotusorb");
 							}
 							
 							if ( // vail
