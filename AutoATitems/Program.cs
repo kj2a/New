@@ -104,7 +104,7 @@ namespace AutoATitems
 					blink = me.FindItem("item_blink");
 					medall = me.FindItem("item_medallion_of_courage") ?? me.FindItem("item_solar_crest");
 					sheep = target.ClassID == ClassID.CDOTA_Unit_Hero_Tidehunter ? null : me.FindItem("item_sheepstick");
-					soul = me.FindItem("item_soul_ring");
+					
 					var qqqqqqqqqqqqq = ObjectManager.GetEntities<Hero>().Where(x => x.Team != me.Team && x.IsAlive && x.IsVisible && !x.IsIllusion && !x.IsMagicImmune()).ToList();	
 					var stoneModif = target.Modifiers.Any(y => y.Name == "modifier_medusa_stone_gaze_stone");
 					
