@@ -14,7 +14,7 @@ namespace AutoATitems
 	internal class Program
 	{
 		private static readonly Menu Menu = new Menu("AutoATitems", "AutoATitems by kj2a", true, "npc_dota_hero_invoker", true);
-		private static Item urn, dagon, soul, halberd, ethereal, mjollnir, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
+		private static Item urn, dagon, halberd, ethereal, mjollnir, orchid, abyssal, mom, Shiva, mail, bkb, satanic, medall, blink, sheep, manta;
 		
 		private static bool keyCombo;
 		private static Hero me;
@@ -58,7 +58,6 @@ namespace AutoATitems
                {
                    {"item_mask_of_madness", true},
                    {"item_sheepstick", true},
-                   {"item_soul_ring", true},
                    {"item_arcane_boots", true},
                    {"item_mjollnir", true},
                    {"item_satanic", true},
@@ -107,7 +106,7 @@ namespace AutoATitems
 					sheep = target.ClassID == ClassID.CDOTA_Unit_Hero_Tidehunter ? null : me.FindItem("item_sheepstick");
 					soul = me.FindItem("item_soul_ring");
 					var qqqqqqqqqqqqq = ObjectManager.GetEntities<Hero>().Where(x => x.Team != me.Team && x.IsAlive && x.IsVisible && !x.IsIllusion && !x.IsMagicImmune()).ToList();	
-					var stoneModif = e.Modifiers.Any(y => y.Name == "modifier_medusa_stone_gaze_stone");
+					var stoneModif = target.Modifiers.Any(y => y.Name == "modifier_medusa_stone_gaze_stone");
 					
 					if (target.IsVisible && me.Distance2D(target) <= 1200)
 					{
@@ -266,18 +265,6 @@ namespace AutoATitems
 								blink.UseAbility(target.Position);
 								Utils.Sleep(250, "blink");
 							}
-
-							if ( // SoulRing Item 
-								soul != null
-								&& soul.CanBeCasted()
-								&& me.CanCast()
-								&& me.Health >= (me.MaximumHealth * 0.5)
-								&& me.Mana <= R.ManaCost
-								&& Menu.Item("Item").GetValue<AbilityToggler>().IsEnabled(soul.Name)
-								)
-							{
-								soul.UseAbility();
-							} // SoulRing Item end
 							if ( // Dagon
 								me.CanCast()
 								&& dagon != null
