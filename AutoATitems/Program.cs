@@ -285,20 +285,20 @@ namespace AutoATitems
 								&& !target.IsStunned()
 								&& !target.IsHexed()
 								&& Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(abyssal.Name)
-								&& Utils.SleepCheck("abyssal")
+								&& Utils.SleepCheck("sheep")
 								&& me.Distance2D(target) <= 400
 								)
 							{
 								abyssal.UseAbility(target);
-								Utils.Sleep(250, "abyssal");
+								Utils.Sleep(250, "sheep");
 							} // Abyssal Item end
 							if (orchid != null && orchid.CanBeCasted() && me.Distance2D(target) <= 900
 								&& Menu.Item("Items").GetValue<AbilityToggler>().IsEnabled(orchid.Name)
 								&& !target.IsStunned() && !target.IsHexed() && !target.IsSilenced()
-								&& Utils.SleepCheck("orchid"))
+								&& Utils.SleepCheck("sheep"))
 							{
 								orchid.UseAbility(target);
-								Utils.Sleep(100, "orchid");
+								Utils.Sleep(100, "sheep");
 							}
 
 							if (Shiva != null && Shiva.CanBeCasted() && me.Distance2D(target) <= 600
