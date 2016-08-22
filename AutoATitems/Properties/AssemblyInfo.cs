@@ -4,13 +4,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-
-[assembly: AssemblyTitle("AutoATitems#")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("AutoATitems")]
+[assembly: AssemblyDescription("AutoATitems")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EnsageSharp")]
-[assembly: AssemblyProduct("AutoATitems#")]
-[assembly: AssemblyCopyright("AutoATitems © kj2a")]
+[assembly: AssemblyCompany("Sun-Dev")]
+[assembly: AssemblyProduct("AutoATitems.properties")]
+[assembly: AssemblyCopyright("Copyright ©  2016 - kj2a")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
