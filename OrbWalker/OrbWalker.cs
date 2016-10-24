@@ -16,7 +16,7 @@ namespace OrbWalker
 {
     class OrbWalker
     {
-        private static readonly Menu Menu = new Menu("OrbWalker", "OrbWalker", true, "npc_dota_hero_Invoker", true);
+        private static readonly Menu Menu = new Menu("OrbWalker", "OrbWalker", true, "item_yasha", true);
         private static int OrbMinDist => Menu.Item("orbwalk.minDistance").GetValue<Slider>().Value;
     
         private static Hero me, target;
