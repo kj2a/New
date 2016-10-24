@@ -31,12 +31,6 @@ namespace OrbWalker
             Menu.AddItem(new MenuItem("Target Type: ", "Target Type: ").SetValue(new StringList(new[] { "Target Selector", "Closest to mouse" }))).SetTooltip("On target selector you can get a better position while comboing. but closest to mouse is more easier");
             if (Menu.Item("Target Type: ").GetValue<StringList>().SelectedIndex == 0)
                 Menu.AddItem(new MenuItem("Target Select", "Target Select").SetValue(new KeyBind('G', KeyBindType.Press)));
-
-            var orbmenu = new Menu("OrbChanging", "Orb Menu");
-            Menu.AddSubMenu(orbmenu);
-            orbmenu.AddItem(new MenuItem("Enable OrbChanging", "Enable OrbChanging").SetValue(true).SetTooltip("Enable/Disable automatic orb Changing."));
-            orbmenu.AddItem(new MenuItem("quas threshold health", "Quas Threshold Health").SetValue(new Slider(90, 1, 100)).SetTooltip("Percentage of HP threshold to change orbs for quas while not attacking."));
-
             Menu.AddItem(new MenuItem("orbwalk.minDistance", "Orbwalk min distance").SetValue(new Slider(250, 0, 700)).SetTooltip("the min distance to stop orbwalking and just auto attack."));
             Menu.AddToMainMenu();
             Game.OnWndProc += Exploding;
@@ -105,7 +99,7 @@ namespace OrbWalker
                         
                         target_magic_imune = target.IsMagicImmune();
                         target_isinvul = target.IsInvul();
-                        Utils.Sleep(200, "Variable Checker");
+                        Utils.Sleep(100, "Variable Checker");
                     }
 					
 					
@@ -115,7 +109,7 @@ namespace OrbWalker
 							Orbwalking.Orbwalk(target);
 						else
 							me.Attack(target, false);
-						Utils.Sleep(200, "orbwalker");
+						Utils.Sleep(100, "orbwalker");
 					}
 					
                     if (myunits != null)
@@ -146,7 +140,7 @@ namespace OrbWalker
                     if (Utils.SleepCheck("moving_idle"))
                     {
                         me.Move(Game.MousePosition, false);
-                        Utils.Sleep(300, "moving_idle");
+                        Utils.Sleep(200, "moving_idle");
                     }
                 }
             }
