@@ -12,29 +12,29 @@ namespace AutoItems
     class AutoItems_kj2a
     {
         private static Hero me;
-		private static Hero mHero;
-		private static Player mPlayer;
+	private static Hero mHero;
+	private static Player mPlayer;
         private static bool heroCreateSideMessage, bearCreateSideMessage;
         private static Item item_bottle, item_phase_boots, item_magic_stick, item_magic_wand, item_cheese, item_arcane_boots;
         private static List<Hero> Alies;
         private static double PercentStickUse = 0.2;
-		private static double PercentCheeseUse = 0.1;
-		private static double PercentArcaneUse = 0.3;
+	private static double PercentCheeseUse = 0.1;
+	private static double PercentArcaneUse = 0.3;
         private static readonly uint WM_MOUSEWHEEL = 0x020A;
         private static readonly Menu Menu = new Menu("Auto Items", "Auto Items", true);
         private static readonly Menu _item_config = new Menu("Items", "Items");
         private static readonly Menu _percent_config = new Menu("Other Settings", "Other Settings");
         private static readonly Dictionary<string, bool> list_of_items = new Dictionary<string, bool>
-		{
-			{"item_bottle",true},
-			{"item_phase_boots",true},
-			{"item_arcane_boots",true},
-			{"item_cheese",true},
-			{"item_magic_stick",true},
-			{"item_magic_wand",true},
-			{"item_dust",true},
-			{"item_hand_of_midas",true}
-		};
+	{
+		{"item_bottle",true},
+		{"item_phase_boots",true},
+		{"item_arcane_boots",true},
+		{"item_cheese",true},
+		{"item_magic_stick",true},
+		{"item_magic_wand",true},
+		{"item_dust",true},
+		{"item_hand_of_midas",true}
+	};
         static void Main(string[] args)
         {
             Menu.AddSubMenu(_item_config);
@@ -42,8 +42,8 @@ namespace AutoItems
             _item_config.AddItem(new MenuItem("Items: ", "Items: ").SetValue(new AbilityToggler(list_of_items)));
             _percent_config.AddItem(new MenuItem("Midas All", "Midas All").SetValue(true).SetTooltip("false = only creeps 5 lvl and > 950 HP."));
             _percent_config.AddItem(new MenuItem("Stick % HP", "Stick % HP").SetValue(new Slider(10, 1, 100)));
-			_percent_config.AddItem(new MenuItem("Cheese % HP", "Cheese % HP").SetValue(new Slider(10, 1, 100)));
-			_percent_config.AddItem(new MenuItem("Arcane Boots % MP", "Arcane Boots % MP").SetValue(new Slider(30, 1, 100)));
+	    _percent_config.AddItem(new MenuItem("Cheese % HP", "Cheese % HP").SetValue(new Slider(10, 1, 100)));
+	    _percent_config.AddItem(new MenuItem("Arcane Boots % MP", "Arcane Boots % MP").SetValue(new Slider(30, 1, 100)));
             Menu.AddToMainMenu();
             Game.OnUpdate += Tick;
             Game.OnUpdate += Game_OnUpdate;
@@ -60,8 +60,8 @@ namespace AutoItems
             {
                 FindItems();
                 PercentStickUse = ((double)Menu.Item("Stick % HP").GetValue<Slider>().Value / 100);
-				PercentCheeseUse = ((double)Menu.Item("Cheese % HP").GetValue<Slider>().Value / 100);
-				PercentArcaneUse = ((double)Menu.Item("Arcane Boots % MP").GetValue<Slider>().Value / 100);
+		PercentCheeseUse = ((double)Menu.Item("Cheese % HP").GetValue<Slider>().Value / 100);
+		PercentArcaneUse = ((double)Menu.Item("Arcane Boots % MP").GetValue<Slider>().Value / 100);
                 if ( item_bottle != null && (!me.IsInvisible() || me.ClassID == ClassID.CDOTA_Unit_Hero_Riki) && !me.IsChanneling() && me.Modifiers.Any(x => x.Name == "modifier_fountain_aura_buff") && _item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled(item_bottle.Name) && Utils.SleepCheck("bottle"))
                 {
                     if(!me.Modifiers.Any(x => x.Name == "modifier_bottle_regeneration") && (me.Health < me.MaximumHealth || me.Mana < me.MaximumMana))
@@ -77,17 +77,17 @@ namespace AutoItems
                     item_phase_boots.UseAbility(false);
                     Utils.Sleep(300, "phaseboots");
                 }				
-				if (item_arcane_boots != null && (!me.IsInvisible() || me.ClassID == ClassID.CDOTA_Unit_Hero_Riki) && !me.IsChanneling() && item_arcane_boots.CanBeCasted() && (double)me.Mana / me.MaximumMana < PercentArcaneUse && _item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled(item_arcane_boots.Name) && Utils.SleepCheck("arcaneboots"))
-				{		
-					item_arcane_boots.UseAbility(false);
-					Utils.Sleep(300, "arcaneboots");
-				}
+		if (item_arcane_boots != null && (!me.IsInvisible() || me.ClassID == ClassID.CDOTA_Unit_Hero_Riki) && !me.IsChanneling() && item_arcane_boots.CanBeCasted() && (double)me.Mana / me.MaximumMana < PercentArcaneUse && _item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled(item_arcane_boots.Name) && Utils.SleepCheck("arcaneboots"))
+		{		
+			item_arcane_boots.UseAbility(false);
+			Utils.Sleep(300, "arcaneboots");
+		}
 						
-				if (item_cheese != null && (!me.IsInvisible() || me.ClassID == ClassID.CDOTA_Unit_Hero_Riki) && !me.IsChanneling() && item_cheese.CanBeCasted() && (double)me.Health / me.MaximumHealth < PercentCheeseUse && _item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled(item_cheese.Name) && Utils.SleepCheck("item_cheese"))
-				{	
-					item_cheese.UseAbility(false);
-					Utils.Sleep(300, "item_cheese");
-				}
+		if (item_cheese != null && (!me.IsInvisible() || me.ClassID == ClassID.CDOTA_Unit_Hero_Riki) && !me.IsChanneling() && item_cheese.CanBeCasted() && (double)me.Health / me.MaximumHealth < PercentCheeseUse && _item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled(item_cheese.Name) && Utils.SleepCheck("item_cheese"))
+		{	
+			item_cheese.UseAbility(false);
+			Utils.Sleep(300, "item_cheese");
+		}
                 if (item_magic_stick != null && (!me.IsInvisible() || me.ClassID == ClassID.CDOTA_Unit_Hero_Riki) && !me.IsChanneling() && item_magic_stick.CanBeCasted() && item_magic_stick.CurrentCharges > 0 && (double)me.Health / me.MaximumHealth < PercentStickUse && _item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled(item_magic_stick.Name) && Utils.SleepCheck("item_magic_stick"))
                 {    
                     item_magic_stick.UseAbility(false);
@@ -108,8 +108,8 @@ namespace AutoItems
                 item_phase_boots = me.FindItem("item_phase_boots");
                 item_magic_stick = me.FindItem("item_magic_stick");
                 item_magic_wand = me.FindItem("item_magic_wand");
-				item_cheese = me.FindItem("item_cheese");
-				item_arcane_boots = me.FindItem("item_arcane_boots");
+		item_cheese = me.FindItem("item_cheese");
+		item_arcane_boots = me.FindItem("item_arcane_boots");
                 Utils.Sleep(500, "Finditems");
             }
         }
@@ -135,18 +135,18 @@ namespace AutoItems
             if (mHero == null) return;
             if  (_item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled("item_hand_of_midas") && Utils.SleepCheck("Auto Midas"))
             {
-				var midas = FindMidas(mHero);
-				var midasOwner =  midas != null ? (Unit) midas.Owner : null;
-				if (midasOwner != null && !midasOwner.IsChanneling() && !midasOwner.IsInvisible())
-				{
-					UseMidas(midas, midasOwner);
-					Utils.Sleep(500, "Auto Midas");
-				}
+		var midas = FindMidas(mHero);
+		var midasOwner =  midas != null ? (Unit) midas.Owner : null;
+		if (midasOwner != null && !midasOwner.IsChanneling() && !midasOwner.IsInvisible())
+		{
+			UseMidas(midas, midasOwner);
+			Utils.Sleep(500, "Auto Midas");
+		}
             }
            if (_item_config.Item("Items: ").GetValue<AbilityToggler>().IsEnabled("item_dust"))
            {
           
-				var dust = mHero.FindItem("item_dust");
+		var dust = mHero.FindItem("item_dust");
             	if (dust==null|| !dust.CanBeCasted() || mHero.IsInvisible() || !Utils.SleepCheck("delay")) return;
             	var enemy = ObjectMgr.GetEntities<Hero>()
                 	.Where(
@@ -182,7 +182,7 @@ namespace AutoItems
 	                if (v.Name != ("npc_dota_hero_nyx_assassin") || !v.Spellbook.Spell4.CanBeCasted()) continue;
 	                dust.UseAbility();
 	                Utils.Sleep(250, "delay");
-				}
+		}
             }
         }
 
